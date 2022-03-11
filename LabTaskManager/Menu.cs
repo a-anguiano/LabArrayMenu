@@ -122,11 +122,22 @@ namespace LabTaskManager
             Console.WriteLine("-------------");
             Console.WriteLine("Enter item to be removed: ");
 
-            int taskNum2Remove = int.Parse(Console.ReadLine());
-            currentTasks[taskNum2Remove - 1] = null;
+            int index2Remove = int.Parse(Console.ReadLine()) - 1;
+            currentTasks[index2Remove] = null;
             
-
-            Console.WriteLine($"{currentTasks[taskNum2Remove - 1]} has been removed");  //interpolation
+            for (int i = index2Remove; i < currentTasks.Length; i++)
+            {
+                if (i == currentTasks.Length -1)
+                {
+                    currentTasks[i] = null;
+                }
+                else
+                {
+                    currentTasks[i] = currentTasks[i + 1];
+                }
+                
+            }
+            Console.WriteLine($"{currentTasks[index2Remove]} has been removed");  //interpolation, fix cuz null
             Console.Write("Press any key to continue ");
             Console.ReadKey();
             Console.Clear();
