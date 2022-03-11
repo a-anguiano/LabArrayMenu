@@ -12,10 +12,9 @@ namespace LabTaskManager
         private const string addTask = "2";
         private const string removeTask = "3";
         private const string quit = "Q";
-        //switch
+
         //string[] taskList = new string[5];        confusion, maybe use loop to update null values
         string[] taskList = { "Dishes", "Bills", "Groceries", "Vaccuum", "" };  //interpolation and indexing
-        //array of tasks, index or foreach
 
         public void Run()
         {
@@ -34,7 +33,7 @@ namespace LabTaskManager
                         AddTask(taskList);      //hmmmm [0]
                         break;
                     case removeTask:
-                        RemoveTask();
+                        RemoveTask(taskList);
                         break;
                     case quit:
                         Console.WriteLine("quit");
@@ -111,30 +110,33 @@ namespace LabTaskManager
             return currentTasks;
         }
 
-        private void RemoveTask()
+        private string[] RemoveTask(string[] currentTasks)
         {
             Console.Clear();
             Console.WriteLine("Task List");
             Console.WriteLine("-------------");
             for (int i = 0; i < taskList.Length; i++)
             {
-                Console.WriteLine($"{taskList[i]}");
+                Console.WriteLine($"{i+1}. {taskList[i]}");
             }
             Console.WriteLine("-------------");
             Console.WriteLine("Enter item to be removed: ");
-            //use string.IsNullOrEmpty()
-            //remove from array
-            Console.WriteLine("has been removed");  //interpolation
+
+            int taskNum2Remove = int.Parse(Console.ReadLine());
+            currentTasks[taskNum2Remove - 1] = null;
+            
+
+            Console.WriteLine($"{currentTasks[taskNum2Remove - 1]} has been removed");  //interpolation
             Console.Write("Press any key to continue ");
             Console.ReadKey();
             Console.Clear();
-            //return array
+            return currentTasks;
         }
 
         private void HandleUnknownInput()
         {
             Console.WriteLine("Wrong");         //adapt to request valid input, maybe not needed right now
-        }
+        }       //may not be needed
 
         private string BuildMenu()
         {
